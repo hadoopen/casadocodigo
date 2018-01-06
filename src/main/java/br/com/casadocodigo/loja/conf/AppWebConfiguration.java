@@ -5,10 +5,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import bra.com.casadocodigo.loja.controllers.HomeController;
+import br.com.casadocodigo.loja.controllers.HomeController;
+import br.com.casadocodigo.loja.daos.ProductDAO;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses={HomeController.class})
+@ComponentScan(basePackageClasses={HomeController.class,ProductDAO.class})
 public class AppWebConfiguration {
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver(){
