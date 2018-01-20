@@ -15,7 +15,7 @@
 <body>
 	<c:url value="/products" var="url"/>
 	<!-- PC é de ProductController - action="${spring:mvcUrl('PC#save').build()}" -->
-		<form:form action="${spring:mvcUrl('PC#save').build()}" method="post" commandName="product">
+		<form:form action="${spring:mvcUrl('PC#save').build()}" method="post" commandName="product" enctype="multipart/form-data">
 			<div>
 				<label for="title">Título</label>
 				<form:input path="title" id="title"/>
@@ -47,6 +47,16 @@
 					</div>
 				</c:forEach>
 			</div>
+			
+			<div>
+				<label for="releaseDate">Data de lançamento</label>
+				<form:input path="releaseDate" type="date" id="releaseDate"/>
+				<form:errors path="releaseDate"/>
+			</div>
+			
+			<label for="summary">Sumario do livro</label>
+			<input type="file" name="summary" id="summary"/>
+			<form:errors path="summaryPath"/>			
 						
 			<div>
 				<input type="submit" value="Enviar">
