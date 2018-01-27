@@ -4,6 +4,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,11 +50,12 @@ public class ProductsController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	@Transactional
+	@CacheEvict(value="lastProducts",allEntries=true)
 	public ModelAndView save(MultipartFile summary,
 			@Valid Product product,
 			BindingResult results,
 			RedirectAttributes attr){
-		
+			
 		
 		if(results.hasErrors()){
 			return form(product);
@@ -74,8 +77,8 @@ public class ProductsController {
 		
 	}
 	
-	
 	@RequestMapping(method=RequestMethod.GET)
+	@Cacheable(value="lastProducts")
 	public ModelAndView list(){
 		
 		ModelAndView modelAndView = new ModelAndView("products/list");
